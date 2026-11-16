@@ -33,6 +33,18 @@ export const Scene2: React.FC = () => {
       })
     : 880;
 
+  // stress meter climbs with each interruption, pegs at the outburst
+  const stress = frozen
+    ? 100
+    : Math.min(
+        100,
+        interpolate(f, [8, 22], [0, 12], {extrapolateRight: "clamp", extrapolateLeft: "clamp"}) +
+          interpolate(f, [22, 30], [0, 23], {extrapolateLeft: "clamp", extrapolateRight: "clamp"}) +
+          interpolate(f, [85, 93], [0, 33], {extrapolateLeft: "clamp", extrapolateRight: "clamp"}) +
+          interpolate(f, [132, 140], [0, 24], {extrapolateLeft: "clamp", extrapolateRight: "clamp"}) +
+          interpolate(f, [195, 205], [0, 8], {extrapolateLeft: "clamp", extrapolateRight: "clamp"}),
+      );
+
   // freeze fade to slight desaturation via gray overlay
   const freezeOverlay = interpolate(f, [FREEZE, FREEZE + 15], [0, 0.28], {
     extrapolateLeft: "clamp",
@@ -148,6 +160,53 @@ export const Scene2: React.FC = () => {
             }}
           />
         )}
+      </div>
+
+      {/* STRESS meter — pinned overlay, climbs with each interruption */}
+      <div
+        style={{
+          position: "absolute",
+          top: 40,
+          right: 40,
+          zIndex: 50,
+          background: "rgba(255,255,255,0.92)",
+          border: "4px solid #1a1a1a",
+          borderRadius: 18,
+          padding: "10px 18px",
+          boxShadow: "5px 6px 0 rgba(16,55,65,0.2)",
+          scale: String(frozen ? 1 + 0.06 * Math.sin(f * 0.5) : 1),
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Archivo Black', sans-serif",
+            fontSize: 26,
+            color: stress >= 100 ? "#c0392b" : "#103741",
+            letterSpacing: 1,
+          }}
+        >
+          STRESS {stress >= 100 ? "MAX" : `${Math.round(stress)}%`}
+        </div>
+        <div
+          style={{
+            marginTop: 6,
+            width: 300,
+            height: 22,
+            background: "#e3ded4",
+            borderRadius: 11,
+            border: "3px solid #1a1a1a",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              width: `${stress * 3}px`,
+              height: "100%",
+              background:
+                stress >= 100 ? "#c0392b" : stress >= 66 ? "#e8912d" : "#e6b93c",
+            }}
+          />
+        </div>
       </div>
 
       {/* to-camera monologue text */}

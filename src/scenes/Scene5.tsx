@@ -63,7 +63,7 @@ export const Scene5: React.FC = () => {
 
       {/* teacher bursts in with "another problem" */}
       {f > 52 && f < BRAND_AT + 8 && (
-        <div style={{position: "absolute", left: teacherX, top: 940, width: 230, height: 390}}>
+        <div style={{position: "absolute", left: teacherX, top: 1105, width: 230, height: 390}}>
           <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
             <Stickman
               t={f}
@@ -83,6 +83,40 @@ export const Scene5: React.FC = () => {
       {f > 160 && f < 240 && (
         <SpeechBubble text="Have you tried MwalimuEase?" x={90} y={600} tail="bottom-left" appear={164} w={560} color="#dff3ee" />
       )}
+
+      {/* laugh pops — comedic payoff beat */}
+      {laughing &&
+        [
+          {x: 130, y: 430, at: 244},
+          {x: 720, y: 380, at: 254},
+          {x: 380, y: 330, at: 264},
+        ].map((h, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: h.x,
+              top: h.y,
+              fontFamily: "'Archivo Black', sans-serif",
+              fontSize: 64,
+              color: "#e8912d",
+              WebkitTextStroke: "3px #1a1a1a",
+              scale: String(
+                interpolate(f, [h.at, h.at + 8], [0, 1], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                  easing: Easing.spring({damping: 8, stiffness: 320}),
+                }),
+              ),
+              rotate: `${i % 2 === 0 ? -8 : 10}deg`,
+              opacity: interpolate(f, [278, 292], [1, 0], {
+                extrapolateRight: "clamp",
+              }),
+            }}
+          >
+            HA!
+          </div>
+        ))}
 
       {/* BRAND CARD */}
       <div
@@ -121,9 +155,26 @@ export const Scene5: React.FC = () => {
             overflow: "hidden",
             boxShadow: "0 18px 50px rgba(0,0,0,0.35)",
             marginBottom: 46,
+            position: "relative",
           }}
         >
           <Img src={staticFile("img/logo.png")} style={{width: "100%", height: "100%"}} />
+          {/* shine sweep across logo */}
+          <div
+            style={{
+              position: "absolute",
+              top: -40,
+              bottom: -40,
+              width: 90,
+              left: interpolate(f, [BRAND_AT + 45, BRAND_AT + 72], [-140, 300], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+              }),
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)",
+              rotate: "16deg",
+            }}
+          />
         </div>
         <div
           style={{
@@ -179,6 +230,9 @@ export const Scene5: React.FC = () => {
               padding: "18px 54px",
               borderRadius: 60,
               boxShadow: "0 8px 0 rgba(0,0,0,0.25)",
+              scale: String(
+                f > BRAND_AT + 62 ? 1 + 0.045 * Math.sin((f - BRAND_AT - 62) * 0.22) : 1,
+              ),
             }}
           >
             mwalimuease.com

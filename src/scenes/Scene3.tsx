@@ -39,8 +39,8 @@ export const Scene3: React.FC = () => {
         </svg>
       </div>
 
-      {/* calm teacher — unbothered */}
-      <div style={{position: "absolute", left: walkIn, top: 950, width: 240, height: 400}}>
+      {/* calm teacher — unbothered, feet on floor */}
+      <div style={{position: "absolute", left: walkIn, top: 1105, width: 240, height: 400}}>
         <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
           <Stickman
             t={f}

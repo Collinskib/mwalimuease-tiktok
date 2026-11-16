@@ -90,6 +90,43 @@ export const Scene1: React.FC = () => {
 
       <FallingPaper seed={3} startFrame={175} />
 
+      {/* instant-context hook chip */}
+      {f > 10 && f < 100 && (
+        <div
+          style={{
+            position: "absolute",
+            top: 60,
+            left: 0,
+            right: 0,
+            display: "flex",
+            justifyContent: "center",
+            scale: String(
+              interpolate(f, [10, 22], [0, 1], {
+                extrapolateRight: "clamp",
+                easing: Easing.spring({damping: 12, stiffness: 220}),
+              }),
+            ),
+            opacity: interpolate(f, [85, 98], [1, 0], {extrapolateRight: "clamp"}),
+          }}
+        >
+          <div
+            style={{
+              background: "#103741",
+              color: "#ffe27a",
+              fontFamily: "'Archivo Black', sans-serif",
+              fontSize: 46,
+              padding: "16px 40px",
+              borderRadius: 20,
+              border: "4px solid #1a1a1a",
+              boxShadow: "6px 8px 0 rgba(16,55,65,0.25)",
+              letterSpacing: 1,
+            }}
+          >
+            POV: YOU RUN A SCHOOL
+          </div>
+        </div>
+      )}
+
     </Camera>
     <SlamText text="RUNNING A SCHOOL IN 2026?" appear={195} y={280} size={88} />
     </>

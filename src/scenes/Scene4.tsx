@@ -11,6 +11,14 @@ const SCREENS: {img: string; label: string; at: number}[] = [
   {img: "img/timetable_web.png", label: "Clash-free timetables, generated", at: 425},
 ];
 
+// retention checklist — each item ticks as its screen appears
+const CHECKLIST: {label: string; at: number}[] = [
+  {label: "STUDENTS", at: 150},
+  {label: "MARKS", at: 250},
+  {label: "FEES", at: 340},
+  {label: "TIMETABLE", at: 425},
+];
+
 /** SCENE 4 — THE SOLUTION (30.5–47s). Absolute 915–1410, local 0–495. */
 export const Scene4: React.FC = () => {
   const f = useCurrentFrame();
@@ -167,6 +175,83 @@ export const Scene4: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* checklist strip — ticks off as each screen appears */}
+      {f > 30 && (
+        <div
+          style={{
+            position: "absolute",
+            top: 800,
+            left: 0,
+            right: 0,
+            display: "flex",
+            justifyContent: "center",
+            gap: 9,
+            zIndex: 30,
+            opacity: interpolate(f, [30, 42], [0, 1], {extrapolateRight: "clamp"}),
+          }}
+        >
+          <div
+            style={{
+              background: "#103741",
+              color: "#ffe27a",
+              fontFamily: "'Archivo Black', sans-serif",
+              fontSize: 22,
+              padding: "10px 14px",
+              borderRadius: 14,
+              border: "3px solid #1a1a1a",
+            }}
+          >
+            ONE DASHBOARD:
+          </div>
+          {CHECKLIST.map((c) => {
+            const done = f >= c.at;
+            const pop = interpolate(f, [c.at, c.at + 10], [0.6, 1], {
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp",
+              easing: Easing.spring({damping: 10, stiffness: 300}),
+            });
+            return (
+              <div
+                key={c.label}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: done ? "#2e9e6b" : "rgba(255,255,255,0.9)",
+                  color: done ? "#fff" : "#667",
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 21,
+                  padding: "10px 13px",
+                  borderRadius: 14,
+                  border: "3px solid #1a1a1a",
+                  scale: String(done ? pop : 1),
+                }}
+              >
+                <div
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    border: "3px solid #1a1a1a",
+                    background: done ? "#ffe27a" : "#e3ded4",
+                    color: "#103741",
+                    fontSize: 16,
+                    fontWeight: 900,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {done ? "✓" : ""}
+                </div>
+                {c.label}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* characters reacting at the bottom */}
       {f < 390 ? (

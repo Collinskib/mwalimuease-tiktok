@@ -11,8 +11,8 @@ import {Scene4} from "./scenes/Scene4";
 import {Scene5} from "./scenes/Scene5";
 import {Captions, AudioTrack} from "./components/UI";
 
-loadPatrick();
-loadArchivo();
+loadPatrick("normal", {weights: ["400"], subsets: ["latin"]});
+loadArchivo("normal", {weights: ["400"], subsets: ["latin"]});
 loadInter("normal", {weights: ["600", "700", "800"], subsets: ["latin"]});
 
 export const Skit: React.FC = () => {

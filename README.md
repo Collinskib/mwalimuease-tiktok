@@ -1,54 +1,38 @@
-# Remotion video
+# MwalimuEase TikTok Skit — "The Headteacher Who Was Tired of Everything"
 
-<p align="center">
-  <a href="https://github.com/remotion-dev/logo">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-dark.apng">
-      <img alt="Animated Remotion Logo" src="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-light.gif">
-    </picture>
-  </a>
-</p>
+A ~63-second animated stickman comedy skit advertising
+[MwalimuEase](https://mwalimuease.com), built with
+[Remotion](https://remotion.dev).
 
-Welcome to your Remotion project!
+- **Format:** 1080x1920 (9:16 vertical), 30 fps, ~63 s
+- **Characters:** stressed headteacher, dramatic teacher, overwhelmed admin,
+  impatient parent (video call), and the calm teacher who saves the day
+- **Scene 4** shows the real MwalimuEase product UI (public marketing
+  screenshots from mwalimuease.com)
 
-## Commands
+## Structure
 
-**Install Dependencies**
-
-```console
-npm i --loglevel=error
+```
+src/
+  components/   Stickman, Office, Camera, UI (bubbles/captions/audio)
+  scenes/       Scene1..Scene5
+  timeline.ts   dialogue, SFX and scene timing (single source of truth)
+public/
+  audio/        TTS dialogue (edge-tts) + synthesized SFX/music
+  img/          logo + real product screenshots
+scripts/
+  gen_voices.py regenerate TTS dialogue (needs `pip install edge-tts`)
+  gen_sfx.py    regenerate SFX + music (pure python + ffmpeg)
 ```
 
-**Start Preview**
+## Render
 
-```console
-npm run dev
+Locally:
+
+```bash
+npm ci
+npx remotion render Skit dist/mwalimuease-tiktok-skit.mp4
 ```
 
-**Render video**
-
-```console
-npx remotion render
-```
-
-**Upgrade Remotion**
-
-```console
-npx remotion upgrade
-```
-
-## Docs
-
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
-
-## Help
-
-We provide help on our [Discord server](https://discord.gg/6VzzNDwUwV).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://github.com/remotion-dev/remotion/issues/new).
-
-## License
-
-Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+Or use GitHub Actions → **Render TikTok Skit** → *Run workflow*. The MP4 is
+uploaded as a build artifact.

@@ -1,0 +1,97 @@
+{
+  "t1_records": {
+    "text": "Sir! I need the student records!",
+    "planned": 2.3,
+    "duration": 3.528
+  },
+  "p1_fees": {
+    "text": "Headteacher! I've been trying to get an update about my child's fees!",
+    "planned": 3.9,
+    "duration": 4.176
+  },
+  "a1_reports": {
+    "text": "Sir, we also need the school reports!",
+    "planned": 5.6,
+    "duration": 3.192
+  },
+  "t2_where": {
+    "text": "Sir, where is the information?",
+    "planned": 7.6,
+    "duration": 2.544
+  },
+  "a2_which": {
+    "text": "Which file has the latest records?",
+    "planned": 9.4,
+    "duration": 2.784
+  },
+  "p2_answer": {
+    "text": "So... are you going to answer me?",
+    "planned": 11.2,
+    "duration": 2.184
+  },
+  "h1_onetime": {
+    "text": "ONE AT A TIME! PLEASE!",
+    "planned": 13.4,
+    "duration": 2.856
+  },
+  "h2_feellike": {
+    "text": "Is running a school... supposed to feel like this?",
+    "planned": 16.4,
+    "duration": 3.648
+  },
+  "c1_hardway": {
+    "text": "Sir... why are you doing all this the hard way?",
+    "planned": 21.2,
+    "duration": 2.904
+  },
+  "h3_whatmean": {
+    "text": "What do you mean?",
+    "planned": 24.6,
+    "duration": 1.8
+  },
+  "c2_tried": {
+    "text": "Have you tried... MwalimuEase?",
+    "planned": 25.8,
+    "duration": 2.28
+  },
+  "h4_mwaliwhat": {
+    "text": "Mwali... what?",
+    "planned": 28.4,
+    "duration": 1.896
+  },
+  "t3_wait": {
+    "text": "Wait... you're telling me we can manage the whole school from one place?",
+    "planned": 33.2,
+    "duration": 4.104
+  },
+  "c3_idea": {
+    "text": "That's the idea! MwalimuEase puts your marks, fees, timetables and reports in one dashboard.",
+    "planned": 37.0,
+    "duration": 6.696
+  },
+  "h5_suffering": {
+    "text": "And I've been suffering all this time?",
+    "planned": 42.6,
+    "duration": 2.664
+  },
+  "c4_unfortunately": {
+    "text": "Unfortunately, yes!",
+    "planned": 44.4,
+    "duration": 1.512
+  },
+  "t4_problem": {
+    "text": "Sir! I have another problem!",
+    "planned": 48.2,
+    "duration": 3.24
+  },
+  "h6_tried": {
+    "text": "Have you tried MwalimuEase?",
+    "planned": 50.6,
+    "duration": 2.448
+  },
+  "h7_stop": {
+    "text": "Stop making school management harder than it needs to be!",
+    "planned": 54.6,
+    "duration": 3.768
+  }
+}

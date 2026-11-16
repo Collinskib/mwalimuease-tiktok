@@ -17,7 +17,7 @@ export const Scene1: React.FC = () => {
   });
 
   // admin enters at ~5.8s (f=174) from left
-  const adminX = interpolate(f, [168, 186], [-320, 270], {
+  const adminX = interpolate(f, [168, 186], [-320, 120], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.quad),
@@ -25,25 +25,23 @@ export const Scene1: React.FC = () => {
 
   // headteacher expression escalation
   const htExpr =
-    f > 190 ? "shocked" : f > 168 ? "stressed" : f > 120 ? "stressed" : f > 60 ? "tired" : "neutral";
+    f > 190 ? "shocked" : f > 168 ? "stressed" : f > 120 ? "tired" : "neutral";
 
-  // papers pile grows
-  const pile = Math.min(10, Math.floor(f / 22) + 2);
+  // papers pile grows slowly — chaos builds, not dumps
+  const pile = Math.min(6, Math.floor(f / 55) + 2);
 
   return (
     <>
     <Camera
       stops={[
         [0, 1.0, 0, 0],
-        [150, 1.06, 0, -20],
-        [195, 1.9, -240, -330], // punch zoom into HT face
-        [209, 2.15, -260, -360],
+        [150, 1.05, 0, -15],
+        [195, 1.85, -240, -330], // punch zoom into HT face
+        [209, 2.05, -255, -350],
       ]}
-      shakeAt={[60, 130]}
-      shakeAmp={5}
     >
       <Office paperPile={pile} />
-      <RingingPhone active={(f > 12 && f < 60) || (f > 100 && f < 150) || f > 175} />
+      <RingingPhone active={f > 18 && f < 58} />
 
       {/* headteacher behind desk */}
       <div style={{position: "absolute", left: 330, top: 880, width: 260, height: 420}}>
@@ -52,16 +50,16 @@ export const Scene1: React.FC = () => {
         </svg>
       </div>
 
-      {/* teacher bursts in with books */}
+      {/* teacher bursts in with books — feet on floor */}
       {f > 52 && (
-        <div style={{position: "absolute", left: teacherX, top: 900, width: 240, height: 400}}>
+        <div style={{position: "absolute", left: teacherX, top: 1095, width: 240, height: 400}}>
           <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
             <Stickman t={f} expression={f < 190 ? "stressed" : "shocked"} pose={f < 75 ? "run" : "stand"} accessories={["books"]} animAmp={0.9} flip />
           </svg>
         </div>
       )}
       {f > 60 && f < 205 && (
-        <SpeechBubble text="Sir! I need the student records!" x={520} y={640} tail="bottom-right" appear={62} />
+        <SpeechBubble text="Sir! I need the student records!" x={520} y={860} tail="bottom-right" appear={62} />
       )}
 
       {/* parent on phone call */}
@@ -80,20 +78,17 @@ export const Scene1: React.FC = () => {
 
       {/* admin with huge paper stack */}
       {f > 165 && (
-        <div style={{position: "absolute", left: adminX, top: 920, width: 230, height: 390}}>
+        <div style={{position: "absolute", left: adminX, top: 1109, width: 230, height: 390}}>
           <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
             <Stickman t={f} expression="stressed" pose="holdStack" accessories={["papers"]} sweat animAmp={0.6} />
           </svg>
         </div>
       )}
       {f > 178 && f < 205 && (
-        <SpeechBubble text="Sir, we also need the school reports!" x={60} y={700} tail="bottom-left" appear={180} w={520} />
+        <SpeechBubble text="Sir, we also need the school reports!" x={60} y={960} tail="bottom-left" appear={180} w={520} />
       )}
 
-      <FallingPaper seed={1} startFrame={40} />
-      <FallingPaper seed={2} startFrame={90} />
-      <FallingPaper seed={3} startFrame={140} />
-      <FallingPaper seed={4} startFrame={170} />
+      <FallingPaper seed={3} startFrame={175} />
 
     </Camera>
     <SlamText text="RUNNING A SCHOOL IN 2026?" appear={195} y={280} size={88} />

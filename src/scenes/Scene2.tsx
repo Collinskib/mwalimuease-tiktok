@@ -23,10 +23,10 @@ export const Scene2: React.FC = () => {
         ? "stressed"
         : "shocked";
 
-  // HT pops up for the "ONE AT A TIME" outburst at local ~200
+  // HT pops up onto the desk for the "ONE AT A TIME" outburst and stays there
   const outburst = f >= 195 && f < FREEZE;
-  const htY = outburst
-    ? interpolate(f, [195, 205], [880, 700], {
+  const htY = f >= 195
+    ? interpolate(f, [195, 205], [880, 770], {
         extrapolateLeft: "clamp",
         extrapolateRight: "clamp",
         easing: Easing.out(Easing.quad),
@@ -80,8 +80,8 @@ export const Scene2: React.FC = () => {
           </svg>
         </div>
 
-        {/* teacher — left side shouting */}
-        <div style={{position: "absolute", left: 60, top: 930, width: 230, height: 390}}>
+        {/* teacher — left side shouting, feet on floor */}
+        <div style={{position: "absolute", left: 60, top: 1109, width: 230, height: 390}}>
           <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
             <Stickman
               t={at}
@@ -93,11 +93,11 @@ export const Scene2: React.FC = () => {
           </svg>
         </div>
         {f > 22 && f < 110 && !frozen && (
-          <SpeechBubble text="Sir, where is the information?" x={40} y={700} tail="bottom-left" appear={24} w={480} />
+          <SpeechBubble text="Sir, where is the information?" x={60} y={950} tail="bottom-left" appear={24} w={480} />
         )}
 
-        {/* admin — right side with papers */}
-        <div style={{position: "absolute", left: 760, top: 940, width: 230, height: 390}}>
+        {/* admin — right side with papers, feet on floor */}
+        <div style={{position: "absolute", left: 800, top: 1124, width: 220, height: 380}}>
           <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
             <Stickman
               t={at}
@@ -111,7 +111,7 @@ export const Scene2: React.FC = () => {
           </svg>
         </div>
         {f > 85 && f < 160 && !frozen && (
-          <SpeechBubble text="Which file has the latest records?" x={480} y={700} tail="bottom-right" appear={88} w={480} />
+          <SpeechBubble text="Which file has the latest records?" x={480} y={950} tail="bottom-right" appear={88} w={480} />
         )}
 
         {/* parent calls again */}

@@ -238,11 +238,15 @@ def build_tension():
                 out[start + i] += s
 
     for bar_i in range(8):
+        # sparse pulse on beat 1 only, soft plucks scattered off-beat
+        add_at(bar_i * bar, kick(0.1, 0.18))
         for b in range(4):
             t = bar_i * bar + b * (60.0 / 140)
-            add_at(t, kick(0.1, 0.3))
-            add_at(t + 0.5 * (60.0 / 140), hat(0.05, 0.07))
-            add_at(t, pluck([440, 466, 415, 523][b], 0.18, 0.12))
+            if b in (1, 3):
+                add_at(t + 0.5 * (60.0 / 140), hat(0.04, 0.05))
+            if random.random() < 0.6:
+                add_at(t + random.choice([0, 0.5]) * (60.0 / 140),
+                       pluck([440, 466, 415, 523, 587][(b + bar_i) % 5], 0.16, 0.09))
     return out
 
 

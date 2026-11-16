@@ -60,12 +60,9 @@ export interface Sfx {
 }
 
 export const SFX: Sfx[] = [
-  // Scene 1 — escalating phones
-  {file: "sfx_ring", start: 0.4, volume: 0.55},
-  {file: "sfx_ring2", start: 1.2, volume: 0.5},
-  {file: "sfx_ring", start: 2.0, volume: 0.6},
+  // Scene 1 — single ring, then entrances
+  {file: "sfx_ring", start: 0.6, volume: 0.55},
   {file: "sfx_whoosh", start: 1.9, volume: 0.6},
-  {file: "sfx_ring2", start: 4.2, volume: 0.55},
   {file: "sfx_pop", start: 4.15, volume: 0.5},
   {file: "sfx_whoosh", start: 5.8, volume: 0.6},
   {file: "sfx_thump", start: 6.3, volume: 0.6},

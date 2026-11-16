@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>MwalimuEase — 3D Skit</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #0b0f12; overflow: hidden;
+    font-family: 'Inter', system-ui, sans-serif; }
+  body { display: flex; align-items: center; justify-content: center; }
+
+  #stage { position: relative; height: 100vh; aspect-ratio: 9/16;
+    background: #f5efe0; overflow: hidden; }
+  #c3d { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* ---------- HUD ---------- */
+  .chip { position: absolute; font-weight: 800; color: #fff; z-index: 20; }
+
+  #pov { top: 3.5%; left: 4%; background: #103741; padding: 2.2% 4%;
+    border-radius: 10px; font-size: 2.1vh; letter-spacing: .5px;
+    opacity: 0; }
+
+  #logoChip { top: 1.8%; left: 4%; display: flex; align-items: center;
+    gap: 8px; background: rgba(255,255,255,.92); color: #103741;
+    padding: 1.1% 2.4%; border-radius: 999px; font-size: 1.7vh;
+    box-shadow: 0 4px 14px rgba(0,0,0,.18); opacity: 0; }
+  #logoChip img { width: 2.4vh; height: 2.4vh; border-radius: 6px; }
+
+  #stress { top: 3.5%; right: 4%; width: 30%; background: rgba(255,255,255,.9);
+    border: 3px solid #103741; border-radius: 999px; padding: 1% 2%;
+    font-size: 1.5vh; font-weight: 800; color: #103741; opacity: 0; z-index: 20; }
+  #stressBar { height: 1.4vh; border-radius: 999px; margin-top: 4px;
+    background: linear-gradient(90deg,#e8912d,#e05252); width: 0%; }
+  #stress.max { border-color: #e05252; color: #e05252; }
+
+  .bubble { position: absolute; background: #fff; border: 3px solid #1a1a1a;
+    border-radius: 18px; padding: 1.6% 3%; font-size: 1.9vh; font-weight: 700;
+    color: #1a1a1a; max-width: 52%; z-index: 15; opacity: 0;
+    transform: scale(.6); transition: opacity .18s, transform .22s cubic-bezier(.2,1.6,.4,1);
+    box-shadow: 0 6px 0 rgba(0,0,0,.15); }
+  .bubble.on { opacity: 1; transform: scale(1); }
+  .bubble.gold { background: #ffe27a; }
+  .bubble.mint { background: #dff3ee; }
+  .bubble::after { content: ""; position: absolute; bottom: -14px; left: 22%;
+    border: 8px solid transparent; border-top: 12px solid #1a1a1a; }
+  .bubble.tr::after { left: auto; right: 22%; }
+
+  #cap { position: absolute; bottom: 4.5%; left: 50%; transform: translateX(-50%);
+    width: 86%; background: rgba(16,23,26,.88); color: #fff; border-radius: 14px;
+    padding: 1.6% 4%; font-size: 1.9vh; font-weight: 600; z-index: 25;
+    opacity: 0; transition: opacity .15s; text-align: center; }
+  #cap .who { font-weight: 800; margin-right: .5em; }
+
+  #checklist { position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; z-index: 20; opacity: 0; }
+  #checklist .cl { background: rgba(255,255,255,.85); border: 2px solid #103741;
+    color: #103741; font-size: 1.35vh; font-weight: 800; padding: 4px 9px;
+    border-radius: 999px; transition: .25s; }
+  #checklist .cl.done { background: #2e9e6b; border-color: #2e9e6b; color: #fff;
+    transform: scale(1.08); }
+  #checklist .lead { background: #103741; color: #fff; }
+
+  .ha { position: absolute; font-family: 'Archivo Black', 'Arial Black', sans-serif;
+    font-size: 4.2vh; color: #e8912d; -webkit-text-stroke: 2.5px #1a1a1a;
+    z-index: 22; opacity: 0; }
+
+  #brand { position: absolute; inset: 0; z-index: 40; display: flex;
+    flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(160deg,#103741 0%,#1d5a70 55%,#4d9dbb 100%);
+    transform: translateX(100%); }
+  #brand img { width: 22vh; height: 22vh; border-radius: 5vh;
+    box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+  #brand h1 { font-family: 'Archivo Black','Arial Black',sans-serif; color: #fff;
+    font-size: 6.4vh; margin-top: 3.5vh; letter-spacing: 1px; }
+  #brand p { color: #bfe6f5; font-size: 2.4vh; font-weight: 600; margin-top: 1vh; }
+  #brand .cta { margin-top: 5vh; background: #ffe27a; color: #103741;
+    font-weight: 800; font-size: 2.6vh; padding: 2.2vh 5vh; border-radius: 999px;
+    box-shadow: 0 8px 0 rgba(0,0,0,.25); animation: pulse 1.6s infinite; }
+  #brand h2 { font-family: 'Archivo Black','Arial Black',sans-serif; color: #ffe27a;
+    font-size: 3.4vh; margin-top: 4vh; text-align: center; line-height: 1.3; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+
+  #freeze { position: absolute; inset: 0; z-index: 18; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 42%, transparent 45%, rgba(10,20,30,.38));
+    backdrop-filter: saturate(.35); opacity: 0; transition: opacity .4s; }
+
+  #play { position: absolute; inset: 0; z-index: 60; display: flex;
+    flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(160deg,#103741,#1d5a70); cursor: pointer; }
+  #play .btn { width: 11vh; height: 11vh; border-radius: 50%; background: #ffe27a;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 0 rgba(0,0,0,.3); }
+  #play .btn svg { width: 45%; margin-left: 8%; }
+  #play h3 { color: #fff; font-size: 2.4vh; margin-top: 3vh; font-weight: 800;
+    letter-spacing: 1px; }
+  #play small { color: #bfe6f5; margin-top: 1vh; font-size: 1.6vh; }
+  #loading { color: #ffe27a; margin-top: 2.4vh; font-size: 1.6vh; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div id="stage">
+  <canvas id="c3d"></canvas>
+  <div id="freeze"></div>
+
+  <div id="pov" class="chip">POV: YOU RUN A SCHOOL</div>
+  <div id="logoChip" class="chip"><img src="img/logo.png" alt=""/>MwalimuEase</div>
+  <div id="stress"><span id="stressLbl">STRESS</span><div id="stressBar"></div></div>
+
+  <div id="bubbles"></div>
+  <div id="checklist"></div>
+  <div id="cap"></div>
+  <div id="hapops"></div>
+
+  <div id="brand">
+    <img src="img/logo.png" alt="MwalimuEase"/>
+    <h1>MwalimuEase</h1>
+    <p>School management made easier.</p>
+    <h2>YOUR SCHOOL DESERVES<br/>BETTER MANAGEMENT.</h2>
+    <div class="cta">mwalimuease.com</div>
+  </div>
+
+  <div id="play">
+    <div class="btn"><svg viewBox="0 0 24 24" fill="#103741"><path d="M8 5v14l11-7z"/></svg></div>
+    <h3>MWALIMUEASE — 3D SKIT</h3>
+    <small>tap to play · sound on</small>
+    <div id="loading"></div>
+  </div>
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>

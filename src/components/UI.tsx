@@ -174,7 +174,7 @@ export const Captions: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        bottom: 120,
+        bottom: 260,
         left: 40,
         right: 40,
         display: "flex",
@@ -184,7 +184,7 @@ export const Captions: React.FC = () => {
         zIndex: 80,
       }}
     >
-      {active.slice(-2).map((l) => {
+      {active.slice(-1).map((l) => {
         const st = SPEAKER_STYLE[l.speaker];
         return (
           <div

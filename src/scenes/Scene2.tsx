@@ -122,8 +122,35 @@ export const Scene2: React.FC = () => {
             />
           </svg>
         </div>
-        {f > 85 && f < 160 && !frozen && (
-          <SpeechBubble text="Which file has the latest records?" x={480} y={950} tail="bottom-right" appear={88} w={480} />
+        {/* desk pile avalanches — physical escalation replaces a fourth demand */}
+        {f > 85 && f < 165 && !frozen && (
+          <>
+            {[0, 1, 2, 3].map((i) => {
+              const slide = interpolate(
+                f,
+                [88 + i * 5, 118 + i * 5],
+                [0, 1],
+                {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.in(Easing.quad)},
+              );
+              return (
+                <div
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    left: 610 + i * 26 + slide * (200 + i * 60),
+                    top: 700 + slide * (430 + i * 60),
+                    width: 110 - i * 8,
+                    height: 80,
+                    background: "#fff",
+                    border: "3px solid #1a1a1a",
+                    borderRadius: 4,
+                    rotate: `${slide * (60 + i * 40)}deg`,
+                    opacity: interpolate(f, [150 + i * 3, 165], [1, 0], {extrapolateRight: "clamp"}),
+                  }}
+                />
+              );
+            })}
+          </>
         )}
 
         {/* parent calls again */}

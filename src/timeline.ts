@@ -36,7 +36,6 @@ export const LINES: Line[] = [
   {file: "p1_fees", start: 4.3, dur: 4.176, speaker: "PARENT", text: "Headteacher! I've been trying to get an update about my child's fees!"},
   {file: "a1_reports", start: 5.9, dur: 3.192, speaker: "ADMIN", text: "Sir, we also need the school reports!"},
   {file: "t2_where", start: 7.8, dur: 2.544, speaker: "TEACHER", text: "Sir, where is the information?"},
-  {file: "a2_which", start: 9.7, dur: 2.784, speaker: "ADMIN", text: "Which file has the latest records?"},
   {file: "p2_answer", start: 11.6, dur: 2.184, speaker: "PARENT", text: "So... are you going to answer me?"},
   {file: "h1_onetime", start: 13.7, dur: 2.856, speaker: "HT", text: "ONE AT A TIME! PLEASE!"},
   {file: "h2_feellike", start: 17.2, dur: 3.648, speaker: "HT", text: "Is running a school... supposed to feel like this?"},
@@ -61,7 +60,7 @@ export interface Sfx {
 
 export const SFX: Sfx[] = [
   // Scene 1 — single ring, then entrances
-  {file: "sfx_ring", start: 0.6, volume: 0.55},
+  {file: "sfx_ring", start: 0.35, volume: 0.55},
   {file: "sfx_whoosh", start: 1.9, volume: 0.6},
   {file: "sfx_pop", start: 4.15, volume: 0.5},
   {file: "sfx_whoosh", start: 5.8, volume: 0.6},
@@ -70,8 +69,8 @@ export const SFX: Sfx[] = [
   // Scene 2 — chaos
   {file: "sfx_ring", start: 7.4, volume: 0.6},
   {file: "sfx_whoosh", start: 7.7, volume: 0.55},
-  {file: "sfx_ring2", start: 9.5, volume: 0.55},
-  {file: "sfx_whoosh", start: 9.6, volume: 0.55},
+  {file: "sfx_swoosh", start: 9.9, volume: 0.5}, // paper avalanche
+  {file: "sfx_scratch", start: 10.4, volume: 0.4},
   {file: "sfx_ring", start: 11.4, volume: 0.6},
   {file: "sfx_thump", start: 12.2, volume: 0.6},
   {file: "sfx_pop", start: 13.6, volume: 1},
@@ -87,10 +86,10 @@ export const SFX: Sfx[] = [
   {file: "sfx_whoosh", start: 31.6, volume: 0.5},
   {file: "sfx_whoosh", start: 32.3, volume: 0.5},
   {file: "sfx_ding", start: 31.8, volume: 0.6},
-  {file: "sfx_pop", start: 35.5, volume: 0.5},
-  {file: "sfx_pop", start: 38.8, volume: 0.5},
-  {file: "sfx_pop", start: 41.8, volume: 0.5},
-  {file: "sfx_pop", start: 44.7, volume: 0.5},
+  {file: "sfx_pop", start: 34.8, volume: 0.5},
+  {file: "sfx_pop", start: 37.7, volume: 0.5},
+  {file: "sfx_pop", start: 40.5, volume: 0.5},
+  {file: "sfx_pop", start: 43.3, volume: 0.5},
   {file: "sfx_wahwah", start: 44.9, volume: 0.55},
   // Scene 5
   {file: "sfx_swoosh", start: 47.0, volume: 0.5},

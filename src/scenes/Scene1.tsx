@@ -23,30 +23,30 @@ export const Scene1: React.FC = () => {
     easing: Easing.out(Easing.quad),
   });
 
-  // headteacher expression escalation
-  const htExpr =
-    f > 190 ? "shocked" : f > 168 ? "stressed" : f > 120 ? "tired" : "neutral";
+  // headteacher is already under pressure from frame 0
+  const htExpr = f > 190 ? "shocked" : "stressed";
 
   // papers pile grows slowly — chaos builds, not dumps
-  const pile = Math.min(6, Math.floor(f / 55) + 2);
+  const pile = Math.min(6, Math.floor(f / 55) + 3);
 
   return (
     <>
     <Camera
       stops={[
-        [0, 1.0, 0, 0],
+        [0, 1.14, -90, -140], // open tight on HT, pull back — motion from frame 0
+        [60, 1.0, 0, 0],
         [150, 1.05, 0, -15],
         [195, 1.85, -240, -330], // punch zoom into HT face
         [209, 2.05, -255, -350],
       ]}
     >
       <Office paperPile={pile} />
-      <RingingPhone active={f > 18 && f < 58} />
+      <RingingPhone active={f < 58} />
 
       {/* headteacher behind desk */}
       <div style={{position: "absolute", left: 330, top: 880, width: 260, height: 420}}>
         <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
-          <Stickman t={f} expression={htExpr} pose="sit" accessories={["tie"]} sweat={f > 100} animAmp={f > 120 ? 0.8 : 0.2} />
+          <Stickman t={f} expression={htExpr} pose="sit" accessories={["tie"]} sweat={f > 40} animAmp={f > 60 ? 0.8 : 0.5} />
         </svg>
       </div>
 
@@ -90,44 +90,44 @@ export const Scene1: React.FC = () => {
 
       <FallingPaper seed={3} startFrame={175} />
 
-      {/* instant-context hook chip */}
-      {f > 10 && f < 100 && (
+    </Camera>
+
+    {/* instant-context hook chip — pinned overlay, visible from the first beats */}
+    {f < 100 && (
+      <div
+        style={{
+          position: "absolute",
+          top: 340,
+          left: 60,
+          scale: String(
+            interpolate(f, [2, 14], [0, 1], {
+              extrapolateRight: "clamp",
+              extrapolateLeft: "clamp",
+              easing: Easing.spring({damping: 12, stiffness: 220}),
+            }),
+          ),
+          opacity: interpolate(f, [85, 98], [1, 0], {extrapolateRight: "clamp"}),
+        }}
+      >
         <div
           style={{
-            position: "absolute",
-            top: 60,
-            left: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "center",
-            scale: String(
-              interpolate(f, [10, 22], [0, 1], {
-                extrapolateRight: "clamp",
-                easing: Easing.spring({damping: 12, stiffness: 220}),
-              }),
-            ),
-            opacity: interpolate(f, [85, 98], [1, 0], {extrapolateRight: "clamp"}),
+            background: "#103741",
+            color: "#ffe27a",
+            fontFamily: "'Archivo Black', sans-serif",
+            fontSize: 44,
+            padding: "14px 34px",
+            borderRadius: 20,
+            border: "4px solid #1a1a1a",
+            boxShadow: "6px 8px 0 rgba(16,55,65,0.25)",
+            letterSpacing: 1,
           }}
         >
-          <div
-            style={{
-              background: "#103741",
-              color: "#ffe27a",
-              fontFamily: "'Archivo Black', sans-serif",
-              fontSize: 46,
-              padding: "16px 40px",
-              borderRadius: 20,
-              border: "4px solid #1a1a1a",
-              boxShadow: "6px 8px 0 rgba(16,55,65,0.25)",
-              letterSpacing: 1,
-            }}
-          >
-            POV: YOU RUN A SCHOOL
-          </div>
+          POV: YOU RUN
+          <br />
+          A SCHOOL
         </div>
-      )}
-
-    </Camera>
+      </div>
+    )}
     <SlamText text="RUNNING A SCHOOL IN 2026?" appear={195} y={280} size={88} />
     </>
   );

@@ -17,6 +17,26 @@ export const Scene5: React.FC = () => {
   });
   const laughing = f > 240 && f < BRAND_AT + 5;
 
+  // camera life: snap in on teacher's panic, punch on HT's callback, push on the laugh
+  const camZoom = interpolate(
+    f,
+    [52, 66, 140, 160, 176, 230, 245, BRAND_AT],
+    [1, 1.08, 1.08, 1.2, 1.2, 1.12, 1.15, 1.15],
+    {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.quad)},
+  );
+  const camX = interpolate(
+    f,
+    [52, 66, 140, 160, 176, 230],
+    [0, -120, -120, -80, -80, -60],
+    {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.quad)},
+  );
+  const camY = interpolate(
+    f,
+    [52, 66, 140, 160, 176, 230],
+    [0, -80, -80, -140, -140, -100],
+    {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.quad)},
+  );
+
   // brand card sweep
   const brandX = interpolate(f, [BRAND_AT, BRAND_AT + 22], [1200, 0], {
     extrapolateLeft: "clamp",
@@ -44,45 +64,54 @@ export const Scene5: React.FC = () => {
 
   return (
     <div style={{position: "absolute", inset: 0, opacity: fade}}>
-      {/* calm office — same room, now tidy */}
-      <Office paperPile={0} tidy />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          scale: String(camZoom),
+          translate: `${camX}px ${camY}px`,
+        }}
+      >
+        {/* calm office — same room, now tidy */}
+        <Office paperPile={0} tidy />
 
-      {/* relaxed headteacher — feet up, tea in hand */}
-      <div style={{position: "absolute", left: 320, top: 900, width: 280, height: 430}}>
-        <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
-          <Stickman
-            t={f}
-            expression={laughing ? "happy" : "calm"}
-            pose={laughing ? "laugh" : f > 160 ? "point" : "recline"}
-            accessories={["tie", "mug"]}
-            animAmp={laughing ? 0.9 : 0.15}
-            bob={laughing ? 8 : 2}
-          />
-        </svg>
-      </div>
-
-      {/* teacher bursts in with "another problem" */}
-      {f > 52 && f < BRAND_AT + 8 && (
-        <div style={{position: "absolute", left: teacherX, top: 1105, width: 230, height: 390}}>
+        {/* relaxed headteacher — feet up, tea in hand */}
+        <div style={{position: "absolute", left: 320, top: 900, width: 280, height: 430}}>
           <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
             <Stickman
               t={f}
-              expression={laughing ? "happy" : "stressed"}
-              pose={laughing ? "laugh" : f < 75 ? "run" : "stand"}
-              accessories={["books"]}
-              animAmp={laughing ? 0.9 : 0.6}
-              bob={laughing ? 8 : 0}
-              flip
+              expression={laughing ? "happy" : "calm"}
+              pose={laughing ? "laugh" : f > 160 ? "point" : "recline"}
+              accessories={["tie", "mug"]}
+              animAmp={laughing ? 0.9 : 0.4}
+              bob={laughing ? 8 : 4}
             />
           </svg>
         </div>
-      )}
-      {f > 62 && f < 160 && (
-        <SpeechBubble text="Sir! I have another problem!" x={430} y={660} tail="bottom-right" appear={64} w={500} />
-      )}
-      {f > 160 && f < 240 && (
-        <SpeechBubble text="Have you tried MwalimuEase?" x={90} y={600} tail="bottom-left" appear={164} w={560} color="#dff3ee" />
-      )}
+
+        {/* teacher bursts in with "another problem" */}
+        {f > 52 && f < BRAND_AT + 8 && (
+          <div style={{position: "absolute", left: teacherX, top: 1105, width: 230, height: 390}}>
+            <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
+              <Stickman
+                t={f}
+                expression={laughing ? "happy" : f < 160 ? "stressed" : "shocked"}
+                pose={laughing ? "laugh" : f < 75 ? "run" : f % 90 < 45 ? "shrug" : "point"}
+                accessories={["books"]}
+                animAmp={laughing ? 0.9 : 0.75}
+                bob={laughing ? 8 : 4}
+                flip
+              />
+            </svg>
+          </div>
+        )}
+        {f > 62 && f < 160 && (
+          <SpeechBubble text="Sir! I have another problem!" x={430} y={660} tail="bottom-right" appear={64} w={500} />
+        )}
+        {f > 160 && f < 240 && (
+          <SpeechBubble text="Have you tried MwalimuEase?" x={90} y={600} tail="bottom-left" appear={164} w={560} color="#dff3ee" />
+        )}
+      </div>
 
       {/* laugh pops — comedic payoff beat */}
       {laughing &&

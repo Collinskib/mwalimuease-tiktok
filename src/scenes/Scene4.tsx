@@ -3,20 +3,20 @@ import {useCurrentFrame, interpolate, Easing, staticFile, Img} from "remotion";
 import {Stickman} from "../components/Stickman";
 import {SpeechBubble} from "../components/UI";
 
-const SCREENS: {img: string; label: string; at: number}[] = [
-  {img: "img/dashboard1.png", label: "One dashboard for the whole school", at: 40},
-  {img: "img/students.png", label: "Student registry — find anyone in seconds", at: 150},
-  {img: "img/marks_entry.png", label: "Marks entry → automatic report cards", at: 250},
-  {img: "img/finances.png", label: "Fee tracking & receipts in real time", at: 340},
-  {img: "img/timetable_web.png", label: "Clash-free timetables, generated", at: 425},
+const SCREENS: {img: string; label: string; at: number; zoom: number; fx: number; fy: number}[] = [
+  {img: "img/dashboard1.png", label: "One dashboard for the whole school", at: 40, zoom: 1.5, fx: 50, fy: 22},
+  {img: "img/students.png", label: "Student registry — find anyone in seconds", at: 130, zoom: 1.55, fx: 48, fy: 42},
+  {img: "img/marks_entry.png", label: "Marks entry → automatic report cards", at: 215, zoom: 1.5, fx: 52, fy: 40},
+  {img: "img/finances.png", label: "Fee tracking & receipts in real time", at: 300, zoom: 1.75, fx: 38, fy: 26},
+  {img: "img/timetable_web.png", label: "Clash-free timetables, generated", at: 385, zoom: 1.45, fx: 50, fy: 44},
 ];
 
 // retention checklist — each item ticks as its screen appears
 const CHECKLIST: {label: string; at: number}[] = [
-  {label: "STUDENTS", at: 150},
-  {label: "MARKS", at: 250},
-  {label: "FEES", at: 340},
-  {label: "TIMETABLE", at: 425},
+  {label: "STUDENTS", at: 130},
+  {label: "MARKS", at: 215},
+  {label: "FEES", at: 300},
+  {label: "TIMETABLE", at: 385},
 ];
 
 /** SCENE 4 — THE SOLUTION (30.5–47s). Absolute 915–1410, local 0–495. */
@@ -43,13 +43,11 @@ export const Scene4: React.FC = () => {
 
   const active = [...SCREENS].reverse().find((s) => f >= s.at) ?? SCREENS[0];
   const screenLocal = f - active.at;
-  const screenScale = interpolate(screenLocal, [0, 12], [1.06, 1], {
+  // hard zoom into one legible UI element, with a slow drift for life
+  const screenScale = interpolate(screenLocal, [0, 90], [active.zoom + 0.06, active.zoom - 0.06], {
     extrapolateRight: "clamp",
-    easing: Easing.out(Easing.quad),
-  });
-  const panY = interpolate(screenLocal, [10, 85], [0, -70], {
     extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
+    easing: Easing.inOut(Easing.quad),
   });
 
   return (
@@ -139,10 +137,9 @@ export const Scene4: React.FC = () => {
                   key={s.img}
                   src={staticFile(s.img)}
                   style={{
-                    width: "114%",
+                    width: "100%",
                     scale: String(screenScale),
-                    translate: `-30px ${panY}px`,
-                    transformOrigin: "50% 0%",
+                    transformOrigin: `${s.fx}% ${s.fy}%`,
                   }}
                 />
               ) : null,
@@ -257,7 +254,7 @@ export const Scene4: React.FC = () => {
       {f < 390 ? (
         <div style={{position: "absolute", left: 50, top: 1290, width: 200, height: 330}}>
           <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
-            <Stickman t={f} expression={f > 120 ? "shocked" : "stressed"} pose={f > 120 ? "shrug" : "point"} accessories={["books"]} animAmp={0.5} />
+            <Stickman t={f} expression={f > 120 ? "shocked" : "stressed"} pose={f > 120 ? "shrug" : "point"} accessories={["books"]} animAmp={0.7} bob={4} />
           </svg>
         </div>
       ) : (
@@ -269,7 +266,7 @@ export const Scene4: React.FC = () => {
       )}
       <div style={{position: "absolute", left: 830, top: 1290, width: 200, height: 330}}>
         <svg viewBox="0 0 200 320" style={{width: "100%", height: "100%"}}>
-          <Stickman t={f} expression="happy" pose={f > 300 ? "point" : "stand"} animAmp={0.3} flip />
+          <Stickman t={f} expression="happy" pose={f > 300 ? "point" : "stand"} animAmp={0.55} bob={4} flip />
         </svg>
       </div>
 

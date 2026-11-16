@@ -1,6 +1,6 @@
 import React from "react";
 import {useCurrentFrame, interpolate, Easing, staticFile, Img} from "remotion";
-import {Office} from "../components/Office";
+import {Office, RingingPhone} from "../components/Office";
 import {Stickman} from "../components/Stickman";
 import {SpeechBubble} from "../components/UI";
 
@@ -106,11 +106,14 @@ export const Scene5: React.FC = () => {
           </div>
         )}
         {f > 62 && f < 160 && (
-          <SpeechBubble text="Sir! I have another problem!" x={430} y={660} tail="bottom-right" appear={64} w={500} />
+          <SpeechBubble text="Sir! The printer has jammed — AGAIN!" x={430} y={660} tail="bottom-right" appear={64} w={540} />
         )}
         {f > 160 && f < 240 && (
           <SpeechBubble text="Have you tried MwalimuEase?" x={90} y={600} tail="bottom-left" appear={164} w={560} color="#dff3ee" />
         )}
+
+        {/* parent calls back — phone rings on the desk, HT answers with the catchphrase over the brand card */}
+        <RingingPhone active={f > 248 && f < BRAND_AT + 8} />
       </div>
 
       {/* laugh pops — comedic payoff beat */}

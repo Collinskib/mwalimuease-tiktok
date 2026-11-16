@@ -59,7 +59,7 @@ export const Scene1: React.FC = () => {
         </div>
       )}
       {f > 60 && f < 205 && (
-        <SpeechBubble text="Sir! I need the student records!" x={520} y={860} tail="bottom-right" appear={62} />
+        <SpeechBubble text="Sir! Parents' meeting in 10 min — records NOW!" x={520} y={860} tail="bottom-right" appear={62} w={540} />
       )}
 
       {/* parent on phone call */}
@@ -73,7 +73,7 @@ export const Scene1: React.FC = () => {
         </PhoneCall>
       )}
       {f > 128 && f < 205 && (
-        <SpeechBubble text="I've been trying to get an update about my child's fees!" x={160} y={260} tail="bottom-right" appear={130} w={520} />
+        <SpeechBubble text="I paid on M-Pesa Monday — where's my receipt?!" x={160} y={260} tail="bottom-right" appear={130} w={540} />
       )}
 
       {/* admin with huge paper stack */}
@@ -85,7 +85,7 @@ export const Scene1: React.FC = () => {
         </div>
       )}
       {f > 178 && f < 205 && (
-        <SpeechBubble text="Sir, we also need the school reports!" x={60} y={960} tail="bottom-left" appear={180} w={520} />
+        <SpeechBubble text="Sir! Education office wants returns by FRIDAY!" x={60} y={960} tail="bottom-left" appear={180} w={540} />
       )}
 
       <FallingPaper seed={3} startFrame={175} />

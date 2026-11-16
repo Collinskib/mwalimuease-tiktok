@@ -1,97 +1,97 @@
 {
   "t1_records": {
-    "text": "Sir! I need the student records!",
-    "planned": 2.3,
-    "duration": 3.528
+    "text": "Sir! The parents' meeting starts in ten minutes \u2014 I need the records NOW!",
+    "planned": 2.0,
+    "duration": 5.592
   },
   "p1_fees": {
-    "text": "Headteacher! I've been trying to get an update about my child's fees!",
-    "planned": 3.9,
-    "duration": 4.176
+    "text": "I paid on M-Pesa on Monday \u2014 how can you not find the receipt?!",
+    "planned": 4.3,
+    "duration": 3.912
   },
   "a1_reports": {
-    "text": "Sir, we also need the school reports!",
-    "planned": 5.6,
-    "duration": 3.192
+    "text": "Sir! The education office wants the returns by Friday!",
+    "planned": 5.9,
+    "duration": 4.704
   },
   "t2_where": {
-    "text": "Sir, where is the information?",
-    "planned": 7.6,
-    "duration": 2.544
-  },
-  "a2_which": {
-    "text": "Which file has the latest records?",
-    "planned": 9.4,
-    "duration": 2.784
+    "text": "Sir! Which file did you put in the drawer?!",
+    "planned": 7.8,
+    "duration": 3.624
   },
   "p2_answer": {
-    "text": "So... are you going to answer me?",
-    "planned": 11.2,
-    "duration": 2.184
+    "text": "Hello? HELLO? I can see you sitting there!",
+    "planned": 11.6,
+    "duration": 3.528
   },
   "h1_onetime": {
-    "text": "ONE AT A TIME! PLEASE!",
-    "planned": 13.4,
-    "duration": 2.856
+    "text": "Yes\u2014no\u2014fees\u2014records\u2014ONE AT A TIME! PLEASE!",
+    "planned": 13.7,
+    "duration": 4.728
   },
   "h2_feellike": {
     "text": "Is running a school... supposed to feel like this?",
-    "planned": 16.4,
+    "planned": 17.2,
     "duration": 3.648
   },
   "c1_hardway": {
     "text": "Sir... why are you doing all this the hard way?",
-    "planned": 21.2,
+    "planned": 21.6,
     "duration": 2.904
   },
   "h3_whatmean": {
     "text": "What do you mean?",
-    "planned": 24.6,
+    "planned": 24.9,
     "duration": 1.8
   },
   "c2_tried": {
     "text": "Have you tried... MwalimuEase?",
-    "planned": 25.8,
+    "planned": 27.1,
     "duration": 2.28
   },
   "h4_mwaliwhat": {
     "text": "Mwali... what?",
-    "planned": 28.4,
+    "planned": 29.8,
     "duration": 1.896
   },
   "t3_wait": {
-    "text": "Wait... you're telling me we can manage the whole school from one place?",
-    "planned": 33.2,
-    "duration": 4.104
+    "text": "Wait \u2014 ALL of it? In one place?",
+    "planned": 32.8,
+    "duration": 3.888
   },
   "c3_idea": {
-    "text": "That's the idea! MwalimuEase puts your marks, fees, timetables and reports in one dashboard.",
-    "planned": 37.0,
-    "duration": 6.696
+    "text": "One dashboard. Marks, fees, timetables \u2014 everything's in there.",
+    "planned": 37.2,
+    "duration": 4.8
   },
   "h5_suffering": {
     "text": "And I've been suffering all this time?",
-    "planned": 42.6,
+    "planned": 44.1,
     "duration": 2.664
   },
   "c4_unfortunately": {
     "text": "Unfortunately, yes!",
-    "planned": 44.4,
+    "planned": 46.9,
     "duration": 1.512
   },
   "t4_problem": {
-    "text": "Sir! I have another problem!",
-    "planned": 48.2,
-    "duration": 3.24
+    "text": "Sir! The printer has jammed \u2014 AGAIN!",
+    "planned": 49.0,
+    "duration": 3.864
   },
   "h6_tried": {
     "text": "Have you tried MwalimuEase?",
-    "planned": 50.6,
+    "planned": 52.6,
     "duration": 2.448
   },
-  "h7_stop": {
-    "text": "Stop making school management harder than it needs to be!",
-    "planned": 54.6,
-    "duration": 3.768
+  "p3_fees": {
+    "text": "Headteacher! About my child's fees\u2014",
+    "planned": 55.6,
+    "duration": 2.856
+  },
+  "h7_tried": {
+    "text": "Have you tried MwalimuEase?",
+    "planned": 58.9,
+    "duration": 2.664
   }
 }

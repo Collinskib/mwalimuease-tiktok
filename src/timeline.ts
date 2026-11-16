@@ -32,24 +32,25 @@ export interface Line {
 }
 
 export const LINES: Line[] = [
-  {file: "t1_records", start: 2.0, dur: 3.528, speaker: "TEACHER", text: "Sir! I need the student records!"},
-  {file: "p1_fees", start: 4.3, dur: 4.176, speaker: "PARENT", text: "Headteacher! I've been trying to get an update about my child's fees!"},
-  {file: "a1_reports", start: 5.9, dur: 3.192, speaker: "ADMIN", text: "Sir, we also need the school reports!"},
-  {file: "t2_where", start: 7.8, dur: 2.544, speaker: "TEACHER", text: "Sir, where is the information?"},
-  {file: "p2_answer", start: 11.6, dur: 2.184, speaker: "PARENT", text: "So... are you going to answer me?"},
-  {file: "h1_onetime", start: 13.7, dur: 2.856, speaker: "HT", text: "ONE AT A TIME! PLEASE!"},
+  {file: "t1_records", start: 2.0, dur: 5.592, speaker: "TEACHER", text: "Sir! The parents' meeting starts in ten minutes — I need the records NOW!"},
+  {file: "p1_fees", start: 4.3, dur: 3.912, speaker: "PARENT", text: "I paid on M-Pesa on Monday — how can you not find the receipt?!"},
+  {file: "a1_reports", start: 5.9, dur: 4.704, speaker: "ADMIN", text: "Sir! The education office wants the returns by Friday!"},
+  {file: "t2_where", start: 7.8, dur: 3.624, speaker: "TEACHER", text: "Sir! Which file did you put in the drawer?!"},
+  {file: "p2_answer", start: 11.6, dur: 3.528, speaker: "PARENT", text: "Hello? HELLO? I can see you sitting there!"},
+  {file: "h1_onetime", start: 13.3, dur: 4.728, speaker: "HT", text: "Yes—no—fees—records—ONE AT A TIME! PLEASE!"},
   {file: "h2_feellike", start: 17.2, dur: 3.648, speaker: "HT", text: "Is running a school... supposed to feel like this?"},
   {file: "c1_hardway", start: 21.6, dur: 2.904, speaker: "CALM", text: "Sir... why are you doing all this the hard way?"},
   {file: "h3_whatmean", start: 24.9, dur: 1.8, speaker: "HT", text: "What do you mean?"},
   {file: "c2_tried", start: 27.1, dur: 2.28, speaker: "CALM", text: "Have you tried... MwalimuEase?"},
   {file: "h4_mwaliwhat", start: 29.8, dur: 1.896, speaker: "HT", text: "Mwali... what?"},
-  {file: "t3_wait", start: 32.8, dur: 4.104, speaker: "TEACHER", text: "Wait... you're telling me we can manage the whole school from one place?"},
-  {file: "c3_idea", start: 37.2, dur: 6.696, speaker: "CALM", text: "That's the idea! MwalimuEase puts your marks, fees, timetables and reports in one dashboard."},
+  {file: "t3_wait", start: 32.8, dur: 3.888, speaker: "TEACHER", text: "Wait — ALL of it? In one place?"},
+  {file: "c3_idea", start: 37.2, dur: 4.8, speaker: "CALM", text: "One dashboard. Marks, fees, timetables — everything's in there."},
   {file: "h5_suffering", start: 44.1, dur: 2.664, speaker: "HT", text: "And I've been suffering all this time?"},
   {file: "c4_unfortunately", start: 46.9, dur: 1.512, speaker: "CALM", text: "Unfortunately, yes!"},
-  {file: "t4_problem", start: 49.0, dur: 3.24, speaker: "TEACHER", text: "Sir! I have another problem!"},
+  {file: "t4_problem", start: 49.0, dur: 3.864, speaker: "TEACHER", text: "Sir! The printer has jammed — AGAIN!"},
   {file: "h6_tried", start: 52.6, dur: 2.448, speaker: "HT", text: "Have you tried MwalimuEase?"},
-  {file: "h7_stop", start: 57.5, dur: 3.768, speaker: "HT", text: "Stop making school management harder than it needs to be!"},
+  {file: "p3_fees", start: 55.6, dur: 2.856, speaker: "PARENT", text: "Headteacher! About my child's fees—"},
+  {file: "h7_tried", start: 58.9, dur: 2.664, speaker: "HT", text: "Have you tried MwalimuEase?"},
 ];
 
 export interface Sfx {
@@ -73,7 +74,7 @@ export const SFX: Sfx[] = [
   {file: "sfx_scratch", start: 10.4, volume: 0.4},
   {file: "sfx_ring", start: 11.4, volume: 0.6},
   {file: "sfx_thump", start: 12.2, volume: 0.6},
-  {file: "sfx_pop", start: 13.6, volume: 1},
+  {file: "sfx_pop", start: 13.2, volume: 1},
   {file: "sfx_scratch", start: 16.55, volume: 1},
   {file: "sfx_pop", start: 19.6, volume: 0.5},
   // Scene 3
@@ -96,6 +97,7 @@ export const SFX: Sfx[] = [
   {file: "sfx_whoosh", start: 48.9, volume: 0.6},
   {file: "sfx_ding", start: 52.5, volume: 0.55},
   {file: "sfx_laugh", start: 55.4, volume: 0.55},
+  {file: "sfx_ring2", start: 55.5, volume: 0.5}, // parent calls back — final gag
   {file: "sfx_pop", start: 55.6, volume: 0.4},
   {file: "sfx_pop", start: 55.95, volume: 0.4},
   {file: "sfx_pop", start: 56.3, volume: 0.4},

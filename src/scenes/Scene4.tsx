@@ -273,7 +273,7 @@ export const Scene4: React.FC = () => {
       {/* dialogue bubbles */}
       {f > 60 && f < 200 && (
         <SpeechBubble
-          text="Wait... we can manage the whole school from ONE place?"
+          text="Wait — ALL of it? In ONE place?"
           x={70}
           y={880}
           tail="bottom-left"
@@ -283,7 +283,7 @@ export const Scene4: React.FC = () => {
       )}
       {f > 200 && f < 400 && (
         <SpeechBubble
-          text="Marks, fees, timetables, reports — one dashboard."
+          text="One dashboard. Marks, fees, timetables — everything."
           x={300}
           y={880}
           tail="bottom-right"

@@ -105,7 +105,7 @@ export const Scene2: React.FC = () => {
           </svg>
         </div>
         {f > 22 && f < 110 && !frozen && (
-          <SpeechBubble text="Sir, where is the information?" x={60} y={950} tail="bottom-left" appear={24} w={480} />
+          <SpeechBubble text="Sir! Which file did you put in the drawer?!" x={60} y={950} tail="bottom-left" appear={24} w={500} />
         )}
 
         {/* admin — right side with papers, feet on floor */}
@@ -164,7 +164,7 @@ export const Scene2: React.FC = () => {
           </PhoneCall>
         )}
         {f > 140 && f < 195 && (
-          <SpeechBubble text="So... are you going to answer me?" x={140} y={330} tail="bottom-right" appear={142} w={460} />
+          <SpeechBubble text="Hello? HELLO? I can see you sitting there!" x={140} y={330} tail="bottom-right" appear={142} w={500} />
         )}
 
         {/* outburst */}

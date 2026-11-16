@@ -12,30 +12,33 @@ os.makedirs(OUT, exist_ok=True)
 
 # id, voice, rate, pitch, text, planned_start_seconds (guidance)
 LINES = [
-    ("t1_records", "en-GB-RyanNeural", "+8%", "+2Hz", "Sir! I need the student records!", 2.3),
-    ("p1_fees", "en-GB-SoniaNeural", "+10%", "+0Hz", "Headteacher! I've been trying to get an update about my child's fees!", 3.9),
-    ("a1_reports", "en-KE-AsiliaNeural", "+8%", "+0Hz", "Sir, we also need the school reports!", 5.6),
-    ("t2_where", "en-GB-RyanNeural", "+10%", "+2Hz", "Sir, where is the information?", 7.6),
-    ("a2_which", "en-KE-AsiliaNeural", "+10%", "+0Hz", "Which file has the latest records?", 9.4),
-    ("p2_answer", "en-GB-SoniaNeural", "+10%", "+0Hz", "So... are you going to answer me?", 11.2),
-    ("h1_onetime", "en-KE-ChilembaNeural", "+12%", "-4Hz", "ONE AT A TIME! PLEASE!", 13.4),
-    ("h2_feellike", "en-KE-ChilembaNeural", "-5%", "-4Hz", "Is running a school... supposed to feel like this?", 16.4),
-    ("c1_hardway", "en-US-AndrewNeural", "+0%", "+0Hz", "Sir... why are you doing all this the hard way?", 21.2),
-    ("h3_whatmean", "en-KE-ChilembaNeural", "+5%", "-4Hz", "What do you mean?", 24.6),
-    ("c2_tried", "en-US-AndrewNeural", "+0%", "+0Hz", "Have you tried... MwalimuEase?", 25.8),
-    ("h4_mwaliwhat", "en-KE-ChilembaNeural", "+5%", "-4Hz", "Mwali... what?", 28.4),
-    ("t3_wait", "en-GB-RyanNeural", "+5%", "+2Hz", "Wait... you're telling me we can manage the whole school from one place?", 33.2),
-    ("c3_idea", "en-US-AndrewNeural", "+0%", "+0Hz", "That's the idea! MwalimuEase puts your marks, fees, timetables and reports in one dashboard.", 37.0),
-    ("h5_suffering", "en-KE-ChilembaNeural", "+8%", "-4Hz", "And I've been suffering all this time?", 42.6),
-    ("c4_unfortunately", "en-US-AndrewNeural", "+5%", "+0Hz", "Unfortunately, yes!", 44.4),
-    ("t4_problem", "en-GB-RyanNeural", "+10%", "+2Hz", "Sir! I have another problem!", 48.2),
-    ("h6_tried", "en-KE-ChilembaNeural", "+0%", "-4Hz", "Have you tried MwalimuEase?", 50.6),
-    ("h7_stop", "en-KE-ChilembaNeural", "-5%", "-4Hz", "Stop making school management harder than it needs to be!", 54.6),
+    ("t1_records", "en-GB-RyanNeural", "+8%", "+2Hz", "Sir! The parents' meeting starts in ten minutes — I need the records NOW!", 2.0),
+    ("p1_fees", "en-GB-SoniaNeural", "+10%", "+0Hz", "I paid on M-Pesa on Monday — how can you not find the receipt?!", 4.3),
+    ("a1_reports", "en-KE-AsiliaNeural", "+8%", "+0Hz", "Sir! The education office wants the returns by Friday!", 5.9),
+    ("t2_where", "en-GB-RyanNeural", "+10%", "+2Hz", "Sir! Which file did you put in the drawer?!", 7.8),
+    ("p2_answer", "en-GB-SoniaNeural", "+10%", "+0Hz", "Hello? HELLO? I can see you sitting there!", 11.6),
+    ("h1_onetime", "en-KE-ChilembaNeural", "+12%", "-4Hz", "Yes—no—fees—records—ONE AT A TIME! PLEASE!", 13.7),
+    ("h2_feellike", "en-KE-ChilembaNeural", "-5%", "-4Hz", "Is running a school... supposed to feel like this?", 17.2),
+    ("c1_hardway", "en-US-AndrewNeural", "+0%", "+0Hz", "Sir... why are you doing all this the hard way?", 21.6),
+    ("h3_whatmean", "en-KE-ChilembaNeural", "+5%", "-4Hz", "What do you mean?", 24.9),
+    ("c2_tried", "en-US-AndrewNeural", "+0%", "+0Hz", "Have you tried... MwalimuEase?", 27.1),
+    ("h4_mwaliwhat", "en-KE-ChilembaNeural", "+5%", "-4Hz", "Mwali... what?", 29.8),
+    ("t3_wait", "en-GB-RyanNeural", "+5%", "+2Hz", "Wait — ALL of it? In one place?", 32.8),
+    ("c3_idea", "en-US-AndrewNeural", "+0%", "+0Hz", "One dashboard. Marks, fees, timetables — everything's in there.", 37.2),
+    ("h5_suffering", "en-KE-ChilembaNeural", "+8%", "-4Hz", "And I've been suffering all this time?", 44.1),
+    ("c4_unfortunately", "en-US-AndrewNeural", "+5%", "+0Hz", "Unfortunately, yes!", 46.9),
+    ("t4_problem", "en-GB-RyanNeural", "+10%", "+2Hz", "Sir! The printer has jammed — AGAIN!", 49.0),
+    ("h6_tried", "en-KE-ChilembaNeural", "+0%", "-4Hz", "Have you tried MwalimuEase?", 52.6),
+    ("p3_fees", "en-GB-SoniaNeural", "+8%", "+0Hz", "Headteacher! About my child's fees—", 55.6),
+    ("h7_tried", "en-KE-ChilembaNeural", "-8%", "-4Hz", "Have you tried MwalimuEase?", 58.9),
 ]
 
 
 async def gen(name, voice, rate, pitch, text):
     out = os.path.join(OUT, f"{name}.mp3")
+    if os.path.exists(out):
+        print("skip", name)
+        return
     for attempt in range(4):
         try:
             c = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch)
